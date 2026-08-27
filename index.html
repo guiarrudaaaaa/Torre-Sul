@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TORRE SUL | Torre de Controle Operacional</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand"><div class="brand-mark">TS</div><div><strong>TORRE SUL</strong><span>Torre de Controle<br />Operacional</span></div></div>
+        <nav class="nav" aria-label="Navegacao principal">
+          <p class="nav-label">OPERACAO</p>
+          <a class="nav-item active" href="#dashboard" data-view="dashboard"><span>◈</span>Dashboard</a>
+          <a class="nav-item" href="#tempo-real" data-view="tempo-real"><span>◉</span>Tempo Real</a>
+          <a class="nav-item" href="#programacao" data-view="programacao"><span>▤</span>Programacao</a>
+          <a class="nav-item" href="#carregamento" data-view="carregamento"><span>↑</span>Carregamento</a>
+          <a class="nav-item" href="#descarga" data-view="descarga"><span>↓</span>Descarga</a>
+          <a class="nav-item" href="#docas" data-view="docas"><span>▦</span>Docas</a>
+          <a class="nav-item" href="#operacao-mobile" data-view="operacao-mobile"><span>▯</span>Operacao Mobile</a>
+          <p class="nav-label">GESTAO</p>
+          <a class="nav-item" href="#gerencial" data-view="gerencial"><span>◫</span>Gerencial</a>
+          <a class="nav-item" href="#historico" data-view="historico"><span>↺</span>Historico</a>
+        </nav>
+        <div class="sidebar-bottom"><a class="nav-item" href="#configuracoes" data-view="configuracoes"><span>⚙</span>Configuracoes</a><div class="user"><div class="avatar">MC</div><div><strong>Marina Costa</strong><span>Coordenadora</span></div><span class="more">•••</span></div></div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar"><button class="icon-button" id="menu-toggle" aria-label="Abrir menu">☰</button><div class="breadcrumbs"><span>Operacao</span><b>/</b><strong id="breadcrumb">Dashboard</strong></div><div class="top-actions"><span class="live-dot"></span><span class="live-label">AO VIVO</span><button class="icon-button notification" aria-label="Notificacoes" onclick="showNotifications()">♢<b>3</b></button><div class="top-avatar">MC</div></div></header>
+        <section class="page" id="page-content"></section>
+      </main>
+    </div>
+    <div class="toast" id="toast"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
