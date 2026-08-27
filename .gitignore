@@ -1,0 +1,5 @@
+supabase.exe
+supabase-go.exe
+.env
+.env.*
+!.env.example

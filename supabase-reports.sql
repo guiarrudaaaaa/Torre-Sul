@@ -10,6 +10,12 @@ alter table public.operations add column if not exists otm_date date;
 alter table public.operations add column if not exists otm_time time;
 alter table public.operations add column if not exists horse_plate text;
 alter table public.operations add column if not exists composition text;
+alter table public.operations add column if not exists arrival_at timestamptz;
+alter table public.operations add column if not exists cd_entry_at timestamptz;
+alter table public.operations add column if not exists dock_at timestamptz;
+alter table public.operations add column if not exists operation_started_at timestamptz;
+alter table public.operations add column if not exists operation_finished_at timestamptz;
+alter table public.operations add column if not exists exited_at timestamptz;
 
 create table if not exists public.operational_reports (
   id uuid primary key default gen_random_uuid(),
@@ -52,13 +58,13 @@ begin
       'by_status', coalesce((select jsonb_object_agg(status, status_count) from (
         select status, count(*) as status_count from public.operations
         where operation_date >= (p_start at time zone 'America/Sao_Paulo')::date
-          and operation_date < (p_end at time zone 'America/Sao_Paulo')::date
+          and operation_date < ((p_end at time zone 'America/Sao_Paulo')::date + case when p_type = 'WEEKLY' then 1 else 0 end)
         group by status
       ) status_summary), '{}'::jsonb)
     )
   from public.operations
   where operation_date >= (p_start at time zone 'America/Sao_Paulo')::date
-    and operation_date < (p_end at time zone 'America/Sao_Paulo')::date
+    and operation_date < ((p_end at time zone 'America/Sao_Paulo')::date + case when p_type = 'WEEKLY' then 1 else 0 end)
   on conflict (report_type, period_start, period_end) do update
     set metrics = excluded.metrics, generated_at = now();
 end;
@@ -83,8 +89,8 @@ $$);
 select cron.schedule('torre-sul-weekly-report', '0 1 * * 0', $$
   select public.generate_operational_report(
     'WEEKLY',
-    (date_trunc('week', now() at time zone 'America/Sao_Paulo') - interval '1 day' + interval '22 hours') at time zone 'America/Sao_Paulo',
-    (date_trunc('week', now() at time zone 'America/Sao_Paulo') + interval '5 days' + interval '22 hours') at time zone 'America/Sao_Paulo'
+    (date_trunc('week', now() at time zone 'America/Sao_Paulo') + interval '22 hours') at time zone 'America/Sao_Paulo',
+    (date_trunc('week', now() at time zone 'America/Sao_Paulo') + interval '6 days' + interval '22 hours') at time zone 'America/Sao_Paulo'
   );
 $$);
 

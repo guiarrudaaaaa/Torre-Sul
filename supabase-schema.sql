@@ -29,6 +29,12 @@ create table if not exists public.operations (
   elapsed text not null default '00:00',
   next_action text,
   last_action time,
+  arrival_at timestamptz,
+  cd_entry_at timestamptz,
+  dock_at timestamptz,
+  operation_started_at timestamptz,
+  operation_finished_at timestamptz,
+  exited_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
