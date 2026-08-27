@@ -5,8 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TORRE SUL | Torre de Controle Operacional</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   </head>
   <body>
+    <section class="auth-screen" id="auth-screen">
+      <div class="auth-box">
+        <div class="brand-mark">TS</div>
+        <p class="eyebrow">TORRE SUL</p>
+        <h1>Acesso operacional</h1>
+        <p class="auth-message">Entre com seu usuário para acessar a torre de controle.</p>
+        <form id="auth-form">
+          <label>E-MAIL<input id="auth-email" type="email" autocomplete="username" required /></label>
+          <label>SENHA<input id="auth-password" type="password" autocomplete="current-password" required /></label>
+          <button class="btn btn-primary" type="submit">ENTRAR</button>
+          <p class="auth-error" id="auth-error" role="alert"></p>
+        </form>
+      </div>
+    </section>
     <div class="app-shell">
       <aside class="sidebar" id="sidebar">
         <div class="brand"><div class="brand-mark">TS</div><div><strong>TORRE SUL</strong><span>Torre de Controle<br />Operacional</span></div></div>
@@ -32,6 +47,7 @@
       </main>
     </div>
     <div class="toast" id="toast"></div>
+    <script src="supabase-config.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
